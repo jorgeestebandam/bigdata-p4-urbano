@@ -17,19 +17,19 @@ Los datos procesados se utilizarán para generar **indicadores consolidados en P
 
 *Diagrama provisional. Se actualizará a medida que avance el proyecto.*
 
-
-graph LR A[Datos abiertos de Valencia] --> B[Ingesta Batch] A --> C[Ingesta Streaming]
-
-B --> D[ETL / Transformación] C --> E[Procesamiento en tiempo real]
-
-D --> F[(Almacenamiento)] E --> G[(Datos en tiempo real)]
-
-F --> H[Power BI] G --> I[Grafana]
-
-F --> J[Modelo predictivo NO₂] J --> K[Predicción]
-
-
-
+```mermaid
+  graph LR
+    A[Datos abiertos de Valencia] --> B[Ingesta Batch]
+    A --> C[Ingesta Streaming]
+    B --> D[ETL / Transformación]
+    C --> E[Procesamiento en tiempo real]
+    D --> F[(Almacenamiento)]
+    E --> G[(Datos en tiempo real)]
+    F --> H[Power BI]
+    G --> I[Grafana]
+    F --> J[Modelo predictivo NO₂]
+    J --> K[Predicción]
+```
 ## Fuentes de datos
 
 | Fuente | Datos | URL / origen | Formato | Frecuencia de actualización | Licencia | Última ingesta |
