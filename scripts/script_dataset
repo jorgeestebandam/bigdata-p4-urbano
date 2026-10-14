@@ -1,0 +1,30 @@
+from datetime import datetime
+import json
+
+import requests
+from pathlib import Path
+
+url = "https://geoportal.valencia.es/server/rest/services/OPENDATA/Trafico/MapServer/188/query?where=1=1&outFields=*&f=json"
+CARPETA_DESTINO = Path(r"C:\Users\Jorge Esteban Garcia\Desktop\BIG DATA\bigdata-p4-urbano\data\raw")
+
+def descargar_datos(url):
+    response = requests.get(url,timeout=60)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error al obtener los datos: {response.status_code}")
+        return None
+
+def guardar_json(datos, carpeta=CARPETA_DESTINO):
+    carpeta.mkdir(parents=True, exist_ok=True)
+    fecha = datetime.now().strftime("%Y-%m-%d")
+    ruta = carpeta / f"intensidad_tráfico_{fecha}.json"
+    with open(ruta, "w", encoding="utf-8") as f:
+        json.dump(datos, f, ensure_ascii=False, indent=2)
+    print(f"Guardado en: {ruta}")
+    return ruta
+
+if __name__ == "__main__":
+    datos = descargar_datos(url)
+    if datos:
+        guardar_json(datos)
