@@ -1,6 +1,5 @@
 from datetime import datetime
 import json
-
 import requests
 from pathlib import Path
 
@@ -17,11 +16,14 @@ def descargar_datos(url):
 
 def guardar_json(datos, carpeta=CARPETA_DESTINO):
     carpeta.mkdir(parents=True, exist_ok=True)
+
     fecha = datetime.now().strftime("%Y-%m-%d")
     ruta = carpeta / f"intensidad_tráfico_{fecha}.json"
+
     with open(ruta, "w", encoding="utf-8") as f:
         json.dump(datos, f, ensure_ascii=False, indent=2)
     print(f"Guardado en: {ruta}")
+    
     return ruta
 
 if __name__ == "__main__":
